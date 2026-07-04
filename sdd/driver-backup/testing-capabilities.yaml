@@ -1,0 +1,15 @@
+testing:
+  runner: pytest
+  test_command: pytest
+  coverage_command: pytest --cov=driver_backup
+  linter: ruff check
+  type_checker: mypy src
+  formatter: ruff format
+  strict_tdd: false
+  capabilities:
+    - unit_testing
+    - async_testing
+    - code_coverage
+    - static_analysis
+    - linting
+    - formatting

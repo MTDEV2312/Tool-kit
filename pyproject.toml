@@ -1,0 +1,63 @@
+[project]
+name = "driver-backup"
+version = "0.1.1"
+description = "A TUI-based utility to backup and restore Windows drivers."
+readme = "README.md"
+requires-python = ">=3.12"
+license = {text = "MIT"}
+authors = [
+    {name = "Your Name", email = "you@example.com"}
+]
+dependencies = [
+    "textual>=0.76.0",
+    "rich>=13.7.0",
+    "typer>=0.12.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.3.0",
+    "mypy>=1.9.0",
+    "pyinstaller>=6.5.0",
+]
+
+[project.scripts]
+driver-backup = "driver_backup.cli:app"
+
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-ra -q --cov=driver_backup"
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "ASYNC", "S", "B", "A", "C4", "T20", "RET", "SIM", "ARG", "PTH", "ERA", "PL", "RUF"]
+ignore = []
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["S101"]
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
