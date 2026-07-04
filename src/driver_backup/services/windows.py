@@ -738,11 +738,19 @@ class WindowsDriverService(DriverBackupService):
             _, stderr_bytes = await process.communicate()
             return_code = process.returncode
 
-            if return_code in (0, 3010):  # 3010 means ERROR_SUCCESS_REBOOT_REQUIRED
+            if return_code in (
+                0,
+                3010,
+                259,
+            ):  # 3010: reboot required, 259: already present / no more items
                 logger.info(
                     f"PnPUtil restore completed successfully (exit code: {return_code})."
                 )
-                reboot_msg = " (Reboot required)" if return_code == 3010 else ""
+                reboot_msg = ""
+                if return_code == 3010:
+                    reboot_msg = " (Reboot required)"
+                elif return_code == 259:
+                    reboot_msg = " (Up to date)"
                 yield BackupProgress(
                     status="completed",
                     percentage=100.0,
