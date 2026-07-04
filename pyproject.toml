@@ -1,6 +1,6 @@
 [project]
 name = "driver-backup"
-version = "0.1.1"
+version = "0.1.2"
 description = "A TUI-based utility to backup and restore Windows drivers."
 readme = "README.md"
 requires-python = ">=3.12"
